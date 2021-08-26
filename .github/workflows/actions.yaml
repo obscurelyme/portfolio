@@ -23,4 +23,10 @@ jobs:
       - name: Running Tests
         run: npm test
       - name: Building
-        run: npm build
+        run: npm npm build
+      - name: Archive Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: build
+          retention-days: 30
