@@ -7,7 +7,7 @@ export default function Header(): React.ReactElement {
   return (
     <>
       <Card>
-        <img src="http://placehold.it/3000x200" />
+        <img src="http://placehold.it/3000x200" alt="title" />
       </Card>
       <AppBar position="sticky">
         <Toolbar variant="regular" disableGutters>
