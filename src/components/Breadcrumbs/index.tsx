@@ -12,7 +12,14 @@ interface Breadcrumb {
 }
 
 function toWhitespace(str: string): string {
-  return str.replace('-', ' ');
+  return str
+    .replace('-', ' ')
+    .split(' ')
+    .map((word) => {
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    })
+    .join(' ')
+    .trim();
 }
 
 export function useBreadcrumbs(pathname: string): Breadcrumb[] {
@@ -25,7 +32,7 @@ export function useBreadcrumbs(pathname: string): Breadcrumb[] {
   return pathRegister.map((path) => {
     p += `/${path}`;
     return {
-      title: path.charAt(0).toUpperCase() + toWhitespace(path.slice(1)),
+      title: toWhitespace(path),
       link: p,
       isCurrentPage: p === pathname,
     };

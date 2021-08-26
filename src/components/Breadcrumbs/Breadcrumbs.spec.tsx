@@ -10,7 +10,7 @@ describe('Breadcrumbs', () => {
 
     expect(current).toStrictEqual([
       { title: 'Blogs', link: '/blogs', isCurrentPage: false },
-      { title: 'Lorem ipsum', link: '/blogs/lorem-ipsum', isCurrentPage: true },
+      { title: 'Lorem Ipsum', link: '/blogs/lorem-ipsum', isCurrentPage: true },
     ]);
   });
 
