@@ -23,7 +23,7 @@ jobs:
       - name: Running Tests
         run: npm test
       - name: Building
-        run: npm npm build
+        run: npm run build
       - name: Archive Artifacts
         uses: actions/upload-artifact@v2
         with:
