@@ -30,3 +30,26 @@ jobs:
           name: build
           path: build
           retention-days: 30
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: contains('refs/heads/master', github.ref)
+
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: build
+          path: build
+
+      - name: Login to AWS
+        if: ${{ success() }}
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.JEVES_AWS_ACCESS_TOKEN }}
+          aws-secret-access-key: ${{ secrets.JEVES_AWS_SECRET_ACCESS_TOKEN }}
+          aws-region: us-east-2
+
+      - name: Upload to AWS S3
+        run: aws --delete s3 sync ./build s3://obscurelymeclub
