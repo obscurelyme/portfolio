@@ -13,6 +13,7 @@ export default function Background(): React.ReactElement {
           preload="auto"
           playsInline
           autoPlay
+          muted
           style={{
             position: 'absolute',
             minHeight: '100vh',
