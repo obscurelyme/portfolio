@@ -7,7 +7,7 @@ on:
     branches: [master]
 
 jobs:
-  test:
+  build:
     runs-on: macos-latest
 
     steps:
@@ -22,21 +22,9 @@ jobs:
         run: npm ci
       - name: Running Tests
         run: npm test
-
-  generate-blog-database:
-    needs: test
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Generating Dynamic Blog Links
+      - name: Generate Blog Database
         run: npm run generate-dynamic-blogs
-
-  build:
-    needs: generate-blog-database
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Building
+      - name: Build
         run: npm run build
       - name: Archive Artifacts
         uses: actions/upload-artifact@v2
