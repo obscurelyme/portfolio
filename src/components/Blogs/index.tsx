@@ -8,11 +8,25 @@ import Link from '../Link';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
-function useLinks(): any[] {
-  const [state, setState] = useState<any>();
+interface Blog {
+  slug: string;
+  title: string;
+  author: string;
+  published: string;
+  next: Partial<Blog> | null;
+  prev: Partial<Blog> | null;
+}
+
+interface BlogDatabase {
+  latest: Blog[];
+  archive: Blog[];
+}
+
+function useDatabase(): BlogDatabase | undefined {
+  const [state, setState] = useState<BlogDatabase | undefined>();
 
   useEffect(() => {
-    import('../../links.json').then((links) => setState(links.default));
+    import('../../db.json').then((links) => setState(links.default));
   });
 
   return state;
@@ -20,7 +34,7 @@ function useLinks(): any[] {
 
 export default function Blogs(): React.ReactElement {
   const { path } = useRouteMatch();
-  const links = useLinks();
+  const db = useDatabase();
 
   return (
     <Box>
@@ -30,10 +44,10 @@ export default function Blogs(): React.ReactElement {
         <Route exact path={path}>
           <Box>Select a blog...</Box>
           <List>
-            {links?.map((link, index) => (
-              <ListItem key={index}>
-                <Link to={link.slug}>
-                  <Typography variant="h6">Lorem Ipsum</Typography>
+            {db?.latest.map((link, index) => (
+              <ListItem key={link.title}>
+                <Link to={`/blogs/${link.slug}`}>
+                  <Typography variant="h6">{link.title}</Typography>
                   <Typography variant="caption">Published: {new Date(link.published).toDateString()}</Typography>
                 </Link>
               </ListItem>

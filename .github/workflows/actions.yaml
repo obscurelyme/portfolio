@@ -7,7 +7,7 @@ on:
     branches: [master]
 
 jobs:
-  build:
+  test:
     runs-on: macos-latest
 
     steps:
@@ -23,6 +23,19 @@ jobs:
       - name: Running Tests
         run: npm test
 
+  generate-blog-database:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Generating Dynamic Blog Links
+        run: npm run generate-dynamic-blogs
+
+  build:
+    needs: publish-blogs
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Building
         run: npm run build
       - name: Archive Artifacts
@@ -31,15 +44,6 @@ jobs:
           name: build
           path: build
           retention-days: 30
-
-  publish blogs:
-    needs: test
-    runs-on: ubuntu-latest
-    if: contains('refs/heads/master', github.ref)
-
-    steps:
-      - name: Generating Dynamic Blog Links
-        run: npm run generate-dynamic-blogs
 
   deploy:
     needs: build
