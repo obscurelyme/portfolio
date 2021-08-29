@@ -23,7 +23,7 @@ jobs:
       - name: Running Tests
         run: npm test
       - name: Generate Blog Database
-        run: npm run generate-dynamic-blogs
+        run: npm run generate-blog-db
       - name: Build
         run: npm run build
       - name: Archive Artifacts
