@@ -24,4 +24,4 @@ yarn-error.log*
 
 .secrets
 
-./src/db.json
+src/db.json
