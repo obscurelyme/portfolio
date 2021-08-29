@@ -32,7 +32,7 @@ jobs:
         run: npm run generate-dynamic-blogs
 
   build:
-    needs: publish-blog-database
+    needs: generate-blog-database
     runs-on: ubuntu-latest
 
     steps:
