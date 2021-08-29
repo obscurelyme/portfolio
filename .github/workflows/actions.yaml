@@ -22,6 +22,7 @@ jobs:
         run: npm ci
       - name: Running Tests
         run: npm test
+
       - name: Building
         run: npm run build
       - name: Archive Artifacts
@@ -30,6 +31,15 @@ jobs:
           name: build
           path: build
           retention-days: 30
+
+  publish blogs:
+    needs: test
+    runs-on: ubuntu-latest
+    if: contains('refs/heads/master', github.ref)
+
+    steps:
+      - name: Generating Dynamic Blog Links
+        run: npm run generate-dynamic-blogs
 
   deploy:
     needs: build
@@ -53,5 +63,5 @@ jobs:
 
       - name: Upload to AWS S3
         run: aws --delete s3 sync ./build s3://obscurelymeclub
-      ## - name: Invalidate CloudFront
-      ## run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION }} --paths "/*"
+      - name: Invalidate CloudFront
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION }} --paths "/index.html"

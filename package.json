@@ -23,6 +23,7 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
+    "generate-blog-links": "ts-node ./scripts/generateBlogLinks.ts",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -45,5 +46,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@aws-sdk/client-s3": "^3.27.0"
   }
 }

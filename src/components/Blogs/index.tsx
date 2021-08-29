@@ -1,13 +1,26 @@
 import React from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 
-import { Box, List, ListItem } from '@material-ui/core';
+import { Box, List, ListItem, Typography } from '@material-ui/core';
 
 import Breadcrumbs from '../Breadcrumbs';
 import Link from '../Link';
+import { useState } from 'react';
+import { useEffect } from 'react';
+
+function useLinks(): any[] {
+  const [state, setState] = useState<any>();
+
+  useEffect(() => {
+    import('../../links.json').then((links) => setState(links.default));
+  });
+
+  return state;
+}
 
 export default function Blogs(): React.ReactElement {
   const { path } = useRouteMatch();
+  const links = useLinks();
 
   return (
     <Box>
@@ -17,12 +30,14 @@ export default function Blogs(): React.ReactElement {
         <Route exact path={path}>
           <Box>Select a blog...</Box>
           <List>
-            <ListItem>
-              <Link to="/blogs/lorem-ipsum">Lorem Ipsum</Link>
-            </ListItem>
-            <ListItem>
-              <Link to="/blogs/lorem-ipsum">Lorem Ipsum</Link>
-            </ListItem>
+            {links?.map((link, index) => (
+              <ListItem key={index}>
+                <Link to={link.slug}>
+                  <Typography variant="h6">Lorem Ipsum</Typography>
+                  <Typography variant="caption">Published: {new Date(link.published).toDateString()}</Typography>
+                </Link>
+              </ListItem>
+            ))}
           </List>
         </Route>
         <Route path={`${path}/:slug`}>
