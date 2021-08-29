@@ -21,4 +21,19 @@ describe('Breadcrumbs', () => {
 
     expect(current).toStrictEqual([]);
   });
+
+  it('should trim trailing / chars', () => {
+    const {
+      result: { current },
+    } = renderHook(() => useBreadcrumbs('/blogs/'));
+
+    expect(current).toStrictEqual([
+      {
+        title: 'Blogs',
+        link: '/blogs',
+        isCurrentPage: true,
+      },
+      null,
+    ]);
+  });
 });

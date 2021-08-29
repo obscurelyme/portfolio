@@ -15,13 +15,13 @@ export function Router(): React.ReactElement {
   return (
     <Container maxWidth="lg">
       <Switch>
-        <Route path="/home" exact>
-          <Home />
-        </Route>
         <Route path="/blogs">
           <Blogs />
         </Route>
-        <Route path="/about">
+        <Route path="/home" exact>
+          <Home />
+        </Route>
+        <Route path="/about" exact>
           <About />
         </Route>
         <Route path="*">

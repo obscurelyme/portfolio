@@ -1,14 +1,11 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
-import { AppBar, Card, Container, Grid, Link, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Container, Grid, Link, Toolbar, Typography } from '@material-ui/core';
 
 export default function Header(): React.ReactElement {
   return (
     <>
-      <Card>
-        <img src="http://placehold.it/3000x200" alt="title" />
-      </Card>
       <AppBar position="sticky">
         <Toolbar variant="regular" disableGutters>
           <Container maxWidth="lg">

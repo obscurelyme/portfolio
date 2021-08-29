@@ -1,0 +1,16 @@
+.obc-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.obc-item {
+  width: 49% !important;
+}
+
+@media screen and (max-width: 767px) {
+  .obc-item {
+    width: 100% !important;
+  }
+}

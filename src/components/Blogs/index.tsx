@@ -1,28 +1,31 @@
 import React from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 
-import { Box, List, ListItem, Typography } from '@material-ui/core';
+import { Box, List, ListItem } from '@material-ui/core';
 
 import Breadcrumbs from '../Breadcrumbs';
-import Link from '../Link';
+import Blog from './Blog';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import BlogThumbnail from './BlogThumbnail';
 
-interface Blog {
+import './styles.css';
+
+interface BlogDetails {
   slug: string;
   title: string;
   author: string;
   published: string;
-  next: Partial<Blog> | null;
-  prev: Partial<Blog> | null;
+  next: Partial<BlogDetails> | null;
+  prev: Partial<BlogDetails> | null;
 }
 
 interface BlogDatabase {
-  latest: Blog[];
-  archive: Blog[];
+  latest: BlogDetails[];
+  archive: BlogDetails[];
 }
 
-function useDatabase(): BlogDatabase | undefined {
+function useBlogDatabase(): BlogDatabase | undefined {
   const [state, setState] = useState<BlogDatabase | undefined>();
 
   useEffect(() => {
@@ -34,28 +37,23 @@ function useDatabase(): BlogDatabase | undefined {
 
 export default function Blogs(): React.ReactElement {
   const { path } = useRouteMatch();
-  const db = useDatabase();
+  const db = useBlogDatabase();
 
   return (
     <Box>
       <Breadcrumbs />
-      <Box>Blogs</Box>
       <Switch>
-        <Route exact path={path}>
-          <Box>Select a blog...</Box>
-          <List>
-            {db?.latest.map((link, index) => (
-              <ListItem key={link.title}>
-                <Link to={`/blogs/${link.slug}`}>
-                  <Typography variant="h6">{link.title}</Typography>
-                  <Typography variant="caption">Published: {new Date(link.published).toDateString()}</Typography>
-                </Link>
+        <Route path={path} exact>
+          <List className="obc-list">
+            {db?.latest.map((link) => (
+              <ListItem key={link.title} disableGutters className="obc-item">
+                <BlogThumbnail title={link.title} published={link.published} slug={link.slug} description />
               </ListItem>
             ))}
           </List>
         </Route>
         <Route path={`${path}/:slug`}>
-          <Box>Lorem Ipsum</Box>
+          <Blog />
         </Route>
       </Switch>
     </Box>
