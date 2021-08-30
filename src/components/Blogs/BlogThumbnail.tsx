@@ -1,30 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { Box, Card, CardActions, CardActionArea, CardContent, Typography } from '@material-ui/core';
+import { Button, Grid, Card, CardActions, CardActionArea, CardContent, Typography } from '@material-ui/core';
 
-import Link from '../Link';
+import { BlogDetails } from './BlogProvider';
+import { Redirect } from 'react-router-dom';
 
-interface BlogThumbnailProps {
-  title: string;
-  description?: boolean;
-  slug: string;
-  published: string;
-}
+export default function BlogThumbnail(details: React.PropsWithChildren<BlogDetails>): React.ReactElement {
+  const [redirect, setRedirect] = useState<string | undefined>();
 
-export default function BlogThumbnail({
-  title,
-  description,
-  slug,
-  published,
-}: React.PropsWithChildren<BlogThumbnailProps>): React.ReactElement {
+  if (redirect) {
+    return <Redirect to={redirect} push />;
+  }
+
   return (
-    <Box width={1}>
+    <Grid item xs={12}>
       <Card>
         <CardActionArea>
           <CardContent>
-            <Typography variant="h4">{title}</Typography>
-            {published && <Typography variant="caption">{published}</Typography>}
-            {description && (
+            <Typography variant="h4">{details.title}</Typography>
+            {details.published && <Typography variant="caption">{details.published}</Typography>}
+            {details.description && (
               <Typography variant="body2">
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Saepe iste quibusdam, earum odit nobis
                 officiis pariatur praesentium quis cumque, architecto repellendus quaerat.
@@ -33,11 +28,16 @@ export default function BlogThumbnail({
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Link type="button" to={`/blogs/${slug}`}>
+          <Button
+            color="primary"
+            onClick={() => {
+              setRedirect(`/blogs/${details.slug}`);
+            }}
+          >
             Read
-          </Link>
+          </Button>
         </CardActions>
       </Card>
-    </Box>
+    </Grid>
   );
 }

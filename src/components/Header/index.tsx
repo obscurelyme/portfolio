@@ -17,8 +17,8 @@ export default function Header(): React.ReactElement {
               </Grid>
               <Grid item xs={2}>
                 <Grid container justifyContent="space-between" alignItems="center">
-                  <Link color="inherit" component={RouterLink} to="/blogs">
-                    Blogs
+                  <Link color="inherit" component={RouterLink} to="/home">
+                    Home
                   </Link>
                   <Link color="inherit" component={RouterLink} to="/about">
                     About
