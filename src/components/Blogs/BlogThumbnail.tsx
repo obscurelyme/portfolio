@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { Button, Grid, Card, CardActions, CardActionArea, CardContent, Typography } from '@material-ui/core';
 
-import { BlogDetails } from './BlogProvider';
+import { BlogDetails } from './Database';
 import { Redirect } from 'react-router-dom';
 
 export default function BlogThumbnail(details: React.PropsWithChildren<BlogDetails>): React.ReactElement {

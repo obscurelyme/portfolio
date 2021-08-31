@@ -37,6 +37,7 @@ function readLine(fileName: string): Promise<MetaData> {
   return new Promise((resolve) => {
     const meta: MetaData = {};
     lineReader.open(fileName, (err: Error, reader: any) => {
+      console.log(`Opening ${fileName}`);
       let reading = true;
 
       function d() {
@@ -82,13 +83,7 @@ function readLine(fileName: string): Promise<MetaData> {
   });
 }
 
-async function serialize(
-  blogs: string[],
-  blogFile: string,
-  index: number,
-  isLast: boolean = false,
-  isFirst: boolean = false,
-): Promise<Blog> {
+async function serialize(blogFile: string): Promise<Blog> {
   const blogStats = statSync(`${resolve(DIR, blogFile)}`);
   const metaData = await readLine(`${resolve(DIR, blogFile)}`);
 
@@ -97,31 +92,82 @@ async function serialize(
     author: (metaData.author as string) ?? '',
     slug: blogFile.replace('.md', ''),
     published: blogStats.birthtime.toString(),
-    next: !isLast ? { title: blogs[index + 1], slug: blogs[index + 1].replace('.md', '') } : null,
-    prev: !isFirst ? { title: blogs[index - 1], slug: blogs[index - 1].replace('.md', '') } : null,
+    next: null,
+    prev: null,
     live: metaData.live as boolean,
+    ...metaData,
   };
 }
 
 async function pushToMemory(blogs: string[], blogDB: BlogDatabase): Promise<void> {
-  return new Promise((resolve) => {
-    blogs.forEach(async (blogFile, index) => {
-      const isFirst = index === 0;
-      const isLast = index === blogs.length - 1;
-      const blog = await serialize(blogs, blogFile, index, isLast, isFirst);
+  for (let index = 0; index < blogs.length; index++) {
+    console.log(`Serializing ${blogs[index]}`);
+    const blog = await serialize(blogs[index]);
 
-      if (blog.live) {
-        if (index < 10) {
-          blogDB.latest.push(await serialize(blogs, blogFile, index, isLast, isFirst));
-        } else {
-          blogDB.archive.push(await serialize(blogs, blogFile, index, isLast, isFirst));
-        }
+    if (blog.live) {
+      if (index < 10) {
+        console.log(`${blogs[index]} pushed to latest`);
+        blogDB.latest.push(blog);
+      } else {
+        console.log(`${blogs[index]} pushed to archive`);
+        blogDB.archive.push(blog);
       }
+    } else {
+      console.warn(`${blogs[index]} was not pushed because it is not yet live`);
+    }
+  }
 
-      if (isLast) {
-        return resolve();
-      }
-    });
+  return Promise.resolve();
+}
+
+function abridgedBlog(blog: Blog): Pick<Blog, 'title' | 'author' | 'slug' | 'published'> {
+  return {
+    title: blog.title,
+    author: blog.author,
+    published: blog.published,
+    slug: blog.slug,
+  };
+}
+
+async function linkAdjacentBlogs(db: BlogDatabase): Promise<void> {
+  db.latest = db.latest.map((blog, index, arr) => {
+    const temp = { ...blog };
+    const isFirst = index === 0;
+    const isLast = index === arr.length - 1;
+
+    if (isFirst) {
+      temp.next = abridgedBlog(arr[index + 1]);
+      return temp;
+    }
+
+    if (isLast) {
+      temp.prev = abridgedBlog(arr[index - 1]);
+      return temp;
+    }
+
+    temp.next = abridgedBlog(arr[index + 1]);
+    temp.prev = abridgedBlog(arr[index - 1]);
+    return temp;
+  });
+
+  db.archive = db.archive.map((blog, index, arr) => {
+    const temp = { ...blog };
+    const isFirst = index === 0;
+    const isLast = index === arr.length - 1;
+
+    if (isFirst) {
+      temp.next = abridgedBlog(arr[index + 1]);
+      return temp;
+    }
+
+    if (isLast) {
+      temp.prev = abridgedBlog(arr[index - 1]);
+      return temp;
+    }
+
+    temp.next = abridgedBlog(arr[index + 1]);
+    temp.prev = abridgedBlog(arr[index - 1]);
+    return temp;
   });
 }
 
@@ -140,7 +186,9 @@ async function main(): Promise<void> {
     return bStats.birthtimeMs - aStats.birthtimeMs;
   });
 
+  console.log(blogs);
   await pushToMemory(blogs, blogDB);
+  await linkAdjacentBlogs(blogDB);
 
   void writeDBFile(blogDB);
 }

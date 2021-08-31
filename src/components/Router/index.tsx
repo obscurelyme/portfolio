@@ -6,25 +6,22 @@ import { Instagram, Twitter } from '@material-ui/icons';
 
 import About from '../About';
 import Blogs from '../Blogs';
-import Blog from '../Blogs/Blog';
-import { useBlogs } from '../Blogs/BlogProvider';
-import BlogThumbnailMini from '../Blogs/BlogThumbnailMini';
+import Blog, { GuardedBlogRoute } from '../Blogs/Blog';
+import SideContent from '../SideContent';
 
 export function RouterProvider({ children }: React.PropsWithChildren<{}>): React.ReactElement {
   return <BrowserRouter>{children}</BrowserRouter>;
 }
 
 export function Router(): React.ReactElement {
-  const { state } = useBlogs();
-
   return (
     <Container maxWidth="lg">
       <Grid container spacing={2}>
         <Grid item md={9}>
           <Switch>
-            <Route exact path="/blogs/:slug">
+            <GuardedBlogRoute exact path="/blogs/:slug">
               <Blog />
-            </Route>
+            </GuardedBlogRoute>
             <Route path="/home" exact>
               <Blogs />
             </Route>
@@ -62,18 +59,7 @@ export function Router(): React.ReactElement {
                 </Grid>
               </Grid>
               <Grid item xs={12}>
-                <Grid container>
-                  {state?.next && (
-                    <Grid item xs={12}>
-                      <BlogThumbnailMini title={state.next.title} slug={state.next.slug} />
-                    </Grid>
-                  )}
-                  {state?.prev && (
-                    <Grid item xs={12}>
-                      <BlogThumbnailMini title={state.prev.title} slug={state.prev.slug} />
-                    </Grid>
-                  )}
-                </Grid>
+                <SideContent />
               </Grid>
             </Grid>
           </Box>

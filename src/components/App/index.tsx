@@ -6,7 +6,8 @@ import Header from '../Header';
 import Footer from '../Footer';
 import { RouterProvider, Router } from '../Router';
 import ThemeProvider from '../Theme';
-import BlogProvider from '../Blogs/BlogProvider';
+import BlogDatabaseProvider from '../Blogs/Database';
+import CurrentBlogProvider from '../Blogs/Current';
 
 function App(): React.ReactElement {
   const [reset, setReset] = useState(0);
@@ -27,11 +28,13 @@ function App(): React.ReactElement {
     >
       <RouterProvider>
         <ThemeProvider>
-          <BlogProvider>
+          <BlogDatabaseProvider>
             <Header />
-            <Router />
+            <CurrentBlogProvider>
+              <Router />
+            </CurrentBlogProvider>
             <Footer />
-          </BlogProvider>
+          </BlogDatabaseProvider>
         </ThemeProvider>
       </RouterProvider>
     </ErrorBoundary>

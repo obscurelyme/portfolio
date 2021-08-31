@@ -1,54 +1,46 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React from 'react';
+import { Redirect, Route, useParams, RouteProps } from 'react-router-dom';
 
 import { Box } from '@material-ui/core';
 
 import Breadcrumbs from '../Breadcrumbs';
-import { useParams } from 'react-router-dom';
+
 import ReactMarkdown from 'react-markdown';
-import { useBlogs } from './BlogProvider';
+import { blogExists, useBlogDatabase, useBlogDetails, useBlogMarkdownContent } from './Database';
+import { useSetCurrentBlogDetails } from './Current';
 
-function useBlog(slug: string): string {
-  const ref = useRef(false);
-  const [state, setState] = useState<string>('');
-  const { db, dispatch } = useBlogs();
+export function GuardedBlogRoute({ children, ...rest }: RouteProps): React.ReactElement {
+  const db = useBlogDatabase();
 
-  useEffect(() => {
-    if (!ref.current) {
-      dispatch?.({
-        type: 'find',
-        slug,
-        db,
-      });
-    }
-
-    fetch(`/blogs/${slug}.md`)
-      .then((response) => {
-        response
-          .text()
-          .then((txt) => {
-            setState(txt);
-          })
-          .catch((error) => {
-            throw new Error(error);
-          });
-      })
-      .catch((error) => {
-        throw new Error(error);
-      });
-
-    return () => {
-      dispatch?.({
-        type: 'view',
-      });
-    };
-  }, [slug, dispatch, db]);
-
-  return state;
+  return (
+    <Route
+      {...rest}
+      render={({ match }) => {
+        const slug = match.params.slug;
+        if (slug && blogExists(slug, db)) {
+          return children;
+        }
+        return <Redirect to="/home" />;
+      }}
+    />
+  );
 }
 
 export default function Blog(): React.ReactElement {
   const { slug } = useParams<{ slug: string }>();
-  const blog = useBlog(slug);
+  const blog = useBlogMarkdownContent(slug);
+  const details = useBlogDetails(slug);
+  // NOTE: This is a safe assertion because of the route guard
+  useSetCurrentBlogDetails(details!);
+
+  if (!blog) {
+    return (
+      <Box>
+        <Breadcrumbs />
+        <ReactMarkdown>### Loading your content...</ReactMarkdown>
+      </Box>
+    );
+  }
 
   return (
     <Box>
