@@ -14,8 +14,28 @@ export const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: ['Roboto', 'Arial', 'sans-serif'].join(','),
+    fontFamily: ['Lato', 'Arial', 'sans-serif'].join(','),
     fontSize: FONT_SIZE,
+  },
+  palette: {
+    primary: {
+      main: '#5BB0BA',
+    },
+    secondary: {
+      main: '#C15B78',
+    },
+    contrastThreshold: 3,
+    tonalOffset: 0.2,
+    background: {
+      default: '#EBF5F7',
+      paper: '#dec8ff',
+    },
+    text: {
+      primary: '#333',
+      secondary: '#5d5d5d',
+      disabled: 'blue',
+      hint: 'green',
+    },
   },
 });
 
@@ -24,6 +44,7 @@ theme.typography.h1 = {
   [theme.breakpoints.down('md')]: {
     fontSize: '3rem',
   },
+  fontFamily: ['Quicksand', 'Arial', 'sans-serif'].join(','),
 };
 
 theme.typography.h2 = {
@@ -31,6 +52,7 @@ theme.typography.h2 = {
   [theme.breakpoints.down('md')]: {
     fontSize: '2.85rem',
   },
+  fontFamily: ['Quicksand', 'Arial', 'sans-serif'].join(','),
 };
 
 theme.typography.h3 = {
@@ -38,6 +60,7 @@ theme.typography.h3 = {
   [theme.breakpoints.down('md')]: {
     fontSize: '2.5rem',
   },
+  fontFamily: ['Quicksand', 'Arial', 'sans-serif'].join(','),
 };
 
 theme.typography.h4 = {
@@ -45,6 +68,7 @@ theme.typography.h4 = {
   [theme.breakpoints.down('md')]: {
     fontSize: '2rem',
   },
+  fontFamily: ['Quicksand', 'Arial', 'sans-serif'].join(','),
 };
 
 theme.typography.h5 = {
@@ -52,6 +76,7 @@ theme.typography.h5 = {
   [theme.breakpoints.down('md')]: {
     fontSize: '1.75rem',
   },
+  fontFamily: ['Quicksand', 'Arial', 'sans-serif'].join(','),
 };
 
 theme.typography.h6 = {
@@ -59,11 +84,16 @@ theme.typography.h6 = {
   [theme.breakpoints.down('md')]: {
     fontSize: '1.5rem',
   },
+  fontFamily: ['Quicksand', 'Arial', 'sans-serif'].join(','),
+};
+
+theme.typography.caption = {
+  fontFamily: ['Quicksand', 'Arial', 'sans-serif'].join(','),
 };
 
 theme.typography.body2 = {
-  [theme.breakpoints.up('lg')]: {
-    fontSize: '1.25rem',
+  [theme.breakpoints.up('xs')]: {
+    fontSize: '1rem',
   },
 };
 

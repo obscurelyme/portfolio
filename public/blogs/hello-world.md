@@ -1,6 +1,8 @@
 <!--
   title: Hello, World
   author: Nico Greco
+  description: Here is a brief description about this blog
+  live: August 7, 2021 12:00:00
 -->
 
 # Google Correlate: The Best SEO Research Tool You Aren’t Using

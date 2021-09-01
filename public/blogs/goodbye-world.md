@@ -1,6 +1,7 @@
 <!--
   title: Goodbye, World
   author: Nico Greco
+  description: Here is a brief description about this blog
   live: August 1, 2021 12:00:00
 -->
 

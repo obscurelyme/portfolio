@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Button, Grid, Card, CardActions, CardActionArea, CardContent, Typography } from '@material-ui/core';
+import { Box, Button, Grid, Card, CardActions, CardActionArea, CardContent, Typography } from '@material-ui/core';
 
 import { BlogDetails } from './Database';
 import { Redirect } from 'react-router-dom';
@@ -18,18 +18,18 @@ export default function BlogThumbnail(details: React.PropsWithChildren<BlogDetai
         <CardActionArea>
           <CardContent>
             <Typography variant="h4">{details.title}</Typography>
-            {details.published && <Typography variant="caption">{details.published}</Typography>}
+            {details.published && (
+              <Typography variant="caption">Published: {new Date(details.published).toDateString()}</Typography>
+            )}
             {details.description && (
-              <Typography variant="body2">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Saepe iste quibusdam, earum odit nobis
-                officiis pariatur praesentium quis cumque, architecto repellendus quaerat.
-              </Typography>
+              <Box pt={2}>
+                <Typography variant="body2">{details.description}</Typography>
+              </Box>
             )}
           </CardContent>
         </CardActionArea>
         <CardActions>
           <Button
-            color="primary"
             onClick={() => {
               setRedirect(`/blogs/${details.slug}`);
             }}

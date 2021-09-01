@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Container, Grid } from '@material-ui/core';
+import { Container, Grid, Typography } from '@material-ui/core';
 
 export default function Footer(): React.ReactElement {
   const currentYear = new Date().getFullYear();
@@ -9,7 +9,9 @@ export default function Footer(): React.ReactElement {
     <footer>
       <Container maxWidth="lg">
         <Grid container justifyContent="center" alignItems="center">
-          <Grid item>&copy; {currentYear}, ObscurelyMe</Grid>
+          <Grid item>
+            <Typography variant="caption">&copy; {currentYear}, ObscurelyMe</Typography>
+          </Grid>
         </Grid>
       </Container>
     </footer>

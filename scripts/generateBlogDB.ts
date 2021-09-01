@@ -1,5 +1,4 @@
 import { writeFile, readdir } from 'fs/promises';
-import { statSync } from 'fs';
 import { resolve } from 'path';
 import lineReader from 'line-reader';
 
@@ -64,6 +63,9 @@ function readLine(fileName: string): Promise<MetaData> {
             const [k, v] = line.trim().split(':');
             if (k === 'live') {
               meta[k] = new Date(v) <= new Date(Date.now());
+              meta.published = new Date(v).toUTCString();
+            } else if (k === 'published') {
+              meta[k] = new Date(v).toUTCString();
             } else {
               meta[k] = v;
             }
@@ -84,14 +86,13 @@ function readLine(fileName: string): Promise<MetaData> {
 }
 
 async function serialize(blogFile: string): Promise<Blog> {
-  const blogStats = statSync(`${resolve(DIR, blogFile)}`);
   const metaData = await readLine(`${resolve(DIR, blogFile)}`);
 
   return {
     title: (metaData.title as string) ?? '',
     author: (metaData.author as string) ?? '',
     slug: blogFile.replace('.md', ''),
-    published: blogStats.birthtime.toString(),
+    published: metaData.published.toString(),
     next: null,
     prev: null,
     live: metaData.live as boolean,
@@ -179,16 +180,37 @@ async function main(): Promise<void> {
     archive: [],
   };
 
-  blogs.sort((a, b) => {
-    const aStats = statSync(`${resolve(DIR, a)}`);
-    const bStats = statSync(`${resolve(DIR, b)}`);
-
-    return bStats.birthtimeMs - aStats.birthtimeMs;
-  });
-
   console.log(blogs);
   await pushToMemory(blogs, blogDB);
   await linkAdjacentBlogs(blogDB);
+
+  console.log('Sorting blogs by published date...');
+  blogDB.latest.sort((a, b) => {
+    const blogA = new Date(a.published);
+    const blogB = new Date(b.published);
+
+    if (blogA > blogB) {
+      return -1;
+    } else if (blogA < blogB) {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
+  console.log('Sorted latest blogs');
+  blogDB.archive.sort((a, b) => {
+    const blogA = new Date(a.published);
+    const blogB = new Date(b.published);
+
+    if (blogA > blogB) {
+      return -1;
+    } else if (blogA < blogB) {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
+  console.log('Sorted archived blogs');
 
   void writeDBFile(blogDB);
 }
