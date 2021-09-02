@@ -54,6 +54,7 @@ jobs:
           aws-region: us-east-2
 
       - name: Upload to AWS S3
-        run: aws --delete s3 sync ./build s3://obscurelymeclub
+        run: aws s3 sync ./build s3://obscurelymeclub --delete --cache-control max-age=2592000,public
+        run: aws s3 cp --metadata-directive REPLACE s3://obscurelymeclub/index.html s3://obscurelymeclub/index.html --content-type text/html
       - name: Invalidate CloudFront
         run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION }} --paths "/index.html"
