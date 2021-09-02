@@ -1,9 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 
-import { Box, Container, Grid, Button, Typography } from '@material-ui/core';
-import { Instagram, Twitter } from '@material-ui/icons';
+import { Hidden, Box, Container, Grid, Typography } from '@material-ui/core';
+import { Instagram, Twitter, GitHub } from '@material-ui/icons';
 
+import IconButton from '../IconButton';
 import About from '../About';
 import Blogs from '../Blogs';
 import Blog, { GuardedBlogRoute } from '../Blogs/Blog';
@@ -11,6 +12,10 @@ import SideContent from '../SideContent';
 
 export function RouterProvider({ children }: React.PropsWithChildren<{}>): React.ReactElement {
   return <BrowserRouter>{children}</BrowserRouter>;
+}
+
+function handleSocialMediaClick(url: string): void {
+  window.open(url, '_blank');
 }
 
 export function Router(): React.ReactElement {
@@ -33,37 +38,46 @@ export function Router(): React.ReactElement {
             </Route>
           </Switch>
         </Grid>
-        <Grid item md={3}>
-          <Box
-            style={{
-              top: '158px',
-              position: 'sticky',
-            }}
-          >
-            <Grid container>
-              <Grid item xs={12}>
-                <Typography align="right">Follow Me</Typography>
-              </Grid>
-              <Grid item xs={12}>
-                <Grid container spacing={1} justifyContent="flex-end">
-                  <Grid item>
-                    <Button variant="contained" color="secondary" startIcon={<Twitter />}>
-                      Twitter
-                    </Button>
+        <Hidden smDown>
+          <Grid item md={3}>
+            <Box
+              style={{
+                top: '158px',
+                position: 'sticky',
+              }}
+            >
+              <Box px={1}>
+                <Grid container alignItems="flex-end">
+                  <Grid item xs={12}>
+                    <Box pb={2}>
+                      <Typography variant="h6" align="center">
+                        Follow Me
+                      </Typography>
+                    </Box>
                   </Grid>
-                  <Grid item>
-                    <Button variant="contained" color="secondary" startIcon={<Instagram />}>
-                      Instagram
-                    </Button>
+                  <Grid item xs={12}>
+                    <Grid container justifyContent="space-around">
+                      <IconButton color="secondary">
+                        <Twitter htmlColor="white" />
+                      </IconButton>
+                      <IconButton color="secondary">
+                        <Instagram htmlColor="white" />
+                      </IconButton>
+                      <IconButton color="secondary">
+                        <GitHub htmlColor="white" />
+                      </IconButton>
+                    </Grid>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Box pt={3}>
+                      <SideContent />
+                    </Box>
                   </Grid>
                 </Grid>
-              </Grid>
-              <Grid item xs={12}>
-                <SideContent />
-              </Grid>
-            </Grid>
-          </Box>
-        </Grid>
+              </Box>
+            </Box>
+          </Grid>
+        </Hidden>
       </Grid>
     </Container>
   );
