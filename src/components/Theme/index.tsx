@@ -3,7 +3,6 @@ import React from 'react';
 
 const FONT_SIZE = 18;
 
-// comment
 export const theme = createTheme({
   breakpoints: {
     values: {
