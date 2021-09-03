@@ -182,7 +182,6 @@ async function main(): Promise<void> {
 
   console.log(blogs);
   await pushToMemory(blogs, blogDB);
-  await linkAdjacentBlogs(blogDB);
 
   console.log('Sorting blogs by published date...');
   blogDB.latest.sort((a, b) => {
@@ -211,6 +210,7 @@ async function main(): Promise<void> {
     }
   });
   console.log('Sorted archived blogs');
+  await linkAdjacentBlogs(blogDB);
 
   void writeDBFile(blogDB);
 }

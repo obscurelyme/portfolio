@@ -1,27 +1,26 @@
 import React from 'react';
 
-import { Card, CardActionArea, CardContent, CardActions, Typography } from '@material-ui/core';
+import { Card, CardActionArea, CardContent, Typography } from '@material-ui/core';
 
-import Link from '../Link';
-import { BlogDetails } from './Database';
+interface BlogThumbnailMiniProps {
+  title?: string;
+  slug?: string;
+  next?: boolean;
+  prev?: boolean;
+  onClick: () => void;
+}
 
-export default function BlogThumbnailMini({ title, slug }: Partial<BlogDetails>): React.ReactElement {
+export default function BlogThumbnailMini({ title, next, onClick }: BlogThumbnailMiniProps): React.ReactElement {
   return (
     <Card>
-      <CardActionArea>
+      <CardActionArea onClick={onClick}>
         <CardContent>
+          <Typography variant="body2" component="span">
+            {next ? 'Next:' : 'Previous:'}
+          </Typography>
           <Typography variant="h6">{title}</Typography>
-          {/* {details.description && (
-            <Typography variant="body2">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Saepe iste quibusdam, earum odit nobis officiis
-              pariatur praesentium quis cumque, architecto repellendus quaerat.
-            </Typography>
-          )} */}
         </CardContent>
       </CardActionArea>
-      <CardActions>
-        <Link to={`/blogs/${slug}`}>Read</Link>
-      </CardActions>
     </Card>
   );
 }

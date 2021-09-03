@@ -1,6 +1,6 @@
 import React, { Dispatch, useContext, useReducer, useEffect, useRef } from 'react';
 
-import { BlogDetails } from '../Database';
+import { BlogDatabase, BlogDetails, getBlog } from '../Database';
 
 interface BlogAction {
   type: string;
@@ -34,6 +34,14 @@ export function useCurrentBlogDetails(): BlogDetails | undefined {
 
 export function useCurrentBlogDispatch(): BlogDispatch {
   return useContext(BlogCurrentDispatchContext);
+}
+
+export function setCurrentBlog(slug: string, db: BlogDatabase, dispatch: BlogDispatch): void {
+  const data = getBlog(slug, db);
+  dispatch?.({
+    type: 'current',
+    data,
+  });
 }
 
 export function setCurrent(data: BlogDetails, dispatch: BlogDispatch): void {

@@ -17,7 +17,6 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 
 export function Header(props: any): React.ReactElement {
-  const { width } = props;
   const [open, setOpen] = useState(false);
 
   function handleOpen(): void {
@@ -36,7 +35,7 @@ export function Header(props: any): React.ReactElement {
             <Grid container spacing={0} justifyContent="space-between" alignItems="center">
               <Grid item>
                 <Typography style={{ color: 'white' }} variant="h5">
-                  Obscurely Me {width}
+                  Obscurely Me
                 </Typography>
               </Grid>
               <Hidden smDown>

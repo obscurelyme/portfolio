@@ -6,8 +6,10 @@ import { Box } from '@material-ui/core';
 import Breadcrumbs from '../Breadcrumbs';
 
 import ReactMarkdown from 'react-markdown';
-import { blogExists, useBlogDatabase, useBlogDetails, useBlogMarkdownContent } from './Database';
-import { useSetCurrentBlogDetails } from './Current';
+import { blogExists, getBlog, useBlogDatabase, useBlogMarkdownContent } from './Database';
+import { useCurrentBlogDispatch, setCurrent, clearCurrent } from './Current';
+import { useEffect } from 'react';
+import Link from '../Link';
 
 export function GuardedBlogRoute({ children, ...rest }: RouteProps): React.ReactElement {
   const db = useBlogDatabase();
@@ -29,9 +31,18 @@ export function GuardedBlogRoute({ children, ...rest }: RouteProps): React.React
 export default function Blog(): React.ReactElement {
   const { slug } = useParams<{ slug: string }>();
   const blog = useBlogMarkdownContent(slug);
-  const details = useBlogDetails(slug);
-  // NOTE: This is a safe assertion because of the route guard
-  useSetCurrentBlogDetails(details!);
+  const dispatch = useCurrentBlogDispatch();
+  const db = useBlogDatabase();
+
+  useEffect(() => {
+    setCurrent(getBlog(slug, db), dispatch);
+  }, [slug, dispatch, db]);
+
+  useEffect(() => {
+    return () => {
+      clearCurrent(dispatch);
+    };
+  }, [dispatch]);
 
   if (!blog) {
     return (
@@ -46,6 +57,7 @@ export default function Blog(): React.ReactElement {
     <Box>
       <Breadcrumbs />
       <ReactMarkdown skipHtml>{blog}</ReactMarkdown>
+      <Link to="/blogs/hello-world">Hello World</Link>
     </Box>
   );
 }

@@ -33,6 +33,12 @@ export function blogExists(slug: string, d: BlogDatabase): boolean {
   return f.length > 0 || !!l?.length;
 }
 
+export function getBlog(slug: string, d: BlogDatabase): BlogDetails {
+  const f = d.latest?.filter((blog) => blog.slug === slug);
+  const l = d.archive?.filter((blog) => blog.slug === slug);
+  return f[0] ?? l?.[0] ?? undefined;
+}
+
 export function useBlogDetails(slug: string): BlogDetails | undefined {
   const db = useBlogDatabase();
   if (db) {
