@@ -25,9 +25,33 @@ const SOCIAL_MEDIA: SocialMedia[] = [
   },
 ];
 
-export default function SocialMediaBar(): React.ReactElement {
+interface SocialMediaBarProps {
+  vertical?: boolean;
+}
+
+export default function SocialMediaBar({ vertical }: SocialMediaBarProps): React.ReactElement {
   function handleSocialMediaClick(url: string): void {
     window.open(url, '_blank');
+  }
+
+  if (vertical) {
+    return (
+      <Box display="flex" flexDirection="column" alignItems="flex-end" pr={8} pt={2}>
+        {SOCIAL_MEDIA.map((social) => (
+          <Box py={2}>
+            <IconButton
+              key={social.url}
+              color="secondary"
+              onClick={() => {
+                handleSocialMediaClick(social.url);
+              }}
+            >
+              <social.Icon htmlColor="white" />
+            </IconButton>
+          </Box>
+        ))}
+      </Box>
+    );
   }
 
   return (

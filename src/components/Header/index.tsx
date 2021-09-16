@@ -16,6 +16,10 @@ import {
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 
+import SocialMediaBar from '../SocialMediaBar';
+
+import './styles.css';
+
 export function Header(props: any): React.ReactElement {
   const [open, setOpen] = useState(false);
 
@@ -59,14 +63,28 @@ export function Header(props: any): React.ReactElement {
                     <Box
                       style={{
                         width: '350px',
+                        height: '100vh',
                       }}
                     >
-                      <Link color="inherit" component={RouterLink} to="/home">
-                        Home
-                      </Link>
-                      <Link color="inherit" component={RouterLink} to="/about">
-                        About
-                      </Link>
+                      <Box
+                        mt={15}
+                        style={{
+                          width: '100%',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          justifyContent: 'flex-start',
+                          alignItems: 'flex-end',
+                          paddingRight: '2rem',
+                        }}
+                      >
+                        <Link className="Header-Link" component={RouterLink} to="/home" onClick={handleClose}>
+                          Home
+                        </Link>
+                        <Link className="Header-Link" component={RouterLink} to="/about" onClick={handleClose}>
+                          About
+                        </Link>
+                      </Box>
+                      <SocialMediaBar vertical />
                     </Box>
                   </Drawer>
                 </Grid>
