@@ -136,13 +136,13 @@ async function linkAdjacentBlogs(db: BlogDatabase): Promise<void> {
     const isFirst = index === 0;
     const isLast = index === arr.length - 1;
 
-    if (isLast) {
-      temp.next = abridgedBlog(arr[index + 1]);
+    if (isFirst) {
+      temp.prev = abridgedBlog(arr[index + 1]);
       return temp;
     }
 
-    if (isFirst) {
-      temp.prev = abridgedBlog(arr[index - 1]);
+    if (isLast) {
+      temp.next = abridgedBlog(arr[index - 1]);
       return temp;
     }
 
@@ -156,13 +156,13 @@ async function linkAdjacentBlogs(db: BlogDatabase): Promise<void> {
     const isFirst = index === 0;
     const isLast = index === arr.length - 1;
 
-    if (isLast) {
-      temp.next = abridgedBlog(arr[index + 1]);
+    if (isFirst) {
+      temp.prev = abridgedBlog(arr[index + 1]);
       return temp;
     }
 
-    if (isFirst) {
-      temp.prev = abridgedBlog(arr[index - 1]);
+    if (isLast) {
+      temp.next = abridgedBlog(arr[index - 1]);
       return temp;
     }
 
