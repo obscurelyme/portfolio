@@ -137,17 +137,17 @@ async function linkAdjacentBlogs(db: BlogDatabase): Promise<void> {
     const isLast = index === arr.length - 1;
 
     if (isFirst) {
-      temp.next = abridgedBlog(arr[index + 1]);
+      temp.prev = abridgedBlog(arr[index + 1]);
       return temp;
     }
 
     if (isLast) {
-      temp.prev = abridgedBlog(arr[index - 1]);
+      temp.next = abridgedBlog(arr[index - 1]);
       return temp;
     }
 
-    temp.next = abridgedBlog(arr[index + 1]);
-    temp.prev = abridgedBlog(arr[index - 1]);
+    temp.next = abridgedBlog(arr[index - 1]);
+    temp.prev = abridgedBlog(arr[index + 1]);
     return temp;
   });
 
@@ -157,17 +157,17 @@ async function linkAdjacentBlogs(db: BlogDatabase): Promise<void> {
     const isLast = index === arr.length - 1;
 
     if (isFirst) {
-      temp.next = abridgedBlog(arr[index + 1]);
+      temp.prev = abridgedBlog(arr[index + 1]);
       return temp;
     }
 
     if (isLast) {
-      temp.prev = abridgedBlog(arr[index - 1]);
+      temp.next = abridgedBlog(arr[index - 1]);
       return temp;
     }
 
-    temp.next = abridgedBlog(arr[index + 1]);
-    temp.prev = abridgedBlog(arr[index - 1]);
+    temp.next = abridgedBlog(arr[index - 1]);
+    temp.prev = abridgedBlog(arr[index + 1]);
     return temp;
   });
 }
