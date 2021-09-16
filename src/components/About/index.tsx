@@ -45,7 +45,7 @@ export default function About(): React.ReactElement {
               <img
                 className="About-ProfilePicture"
                 src="https://via.placeholder.com/400x300"
-                alt="profile image"
+                alt="profile"
                 title="profile image"
               />
             </Box>
