@@ -29,6 +29,7 @@
   },
   "scripts": {
     "generate-blog-db": "ts-node ./scripts/generateBlogDB.ts",
+    "echod": "echo $(mkcert -CAROOT)/local.key",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
