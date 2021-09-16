@@ -81,7 +81,7 @@ export default function CurrentBlogProvider({ children }: React.PropsWithChildre
 
   return (
     <BlogCurrentDispatchContext.Provider value={dispatch}>
-      <BlogCurrentContent.Provider value={current}>{children}</BlogCurrentContent.Provider>;
+      <BlogCurrentContent.Provider value={current}>{children}</BlogCurrentContent.Provider>
     </BlogCurrentDispatchContext.Provider>
   );
 }
