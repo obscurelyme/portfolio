@@ -1,0 +1,14 @@
+.About-ProfilePicture {
+  height: auto;
+  width: 100%;
+  max-width: 700px;
+}
+
+.About-Typography {
+  max-width: 700px;
+}
+
+.About-ProfileContainer {
+  display: flex;
+  justify-content: center;
+}

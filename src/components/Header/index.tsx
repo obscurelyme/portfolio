@@ -55,9 +55,9 @@ export function Header(props: any): React.ReactElement {
                 </Grid>
               </Hidden>
               <Hidden only={['md', 'lg', 'xl']}>
-                <Grid item xs={2}>
+                <Grid item xs={2} style={{ display: 'flex', justifyContent: 'flex-end' }}>
                   <IconButton onClick={handleOpen}>
-                    <MenuIcon />
+                    <MenuIcon htmlColor="white" />
                   </IconButton>
                   <Drawer anchor="right" open={open} onClose={handleClose}>
                     <Box
