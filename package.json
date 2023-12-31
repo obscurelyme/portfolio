@@ -1,0 +1,16 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "source": "src/index.html",
+  "repository": "git@github.com:obscurelyme/portfolio.git",
+  "author": "Nicola Mackenzie Greco <obscurelymeclub@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "parcel --open",
+    "build": "parcel build --dist-dir bin --no-source-maps"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "parcel": "^2.10.3"
+  }
+}
