@@ -12,8 +12,180 @@ html {
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: rgb(41, 0, 46);
+  background-color: rgb(40, 0, 54);
   margin: 0;
   padding: 0;
   color: #fff;
+  font-size: 18px;
+}
+
+/* Header Styles */
+
+@media (min-width: 960px) {
+  header {
+    padding: 0;
+  }
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 75px;
+  padding: 0px 16px;
+  box-shadow: 0px -9px 20px 10px #fff;
+  background-color: #885ab7;
+  position: fixed;
+  width: 100%;
+  top: 0;
+}
+
+div.header-buffer {
+  height: 75px;
+  width: 100%;
+}
+
+div.row {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 960px;
+  flex-grow: 1;
+}
+
+nav.header-nav ul {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+nav.header-nav {
+  max-width: 960px;
+  min-width: 300px;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+ul li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.obscure-anchor {
+  text-decoration: none;
+  color: #fff;
+  &:hover,&:focus {
+    color: #affae2;
+  }
+}
+
+/* Sections */
+
+@media (min-width: 960px) {
+  div.section-row {
+    padding: 0;
+  }
+}
+
+.scroll-margin-top {
+  scroll-margin-top: 90px;
+  scroll-snap-margin-top: 90px;
+}
+
+div.section-row {
+  display: flex;
+  justify-content: center;
+  padding: 0px 16px;
+}
+
+div.section-row section {
+  flex-grow: 1;
+}
+
+section.obscure-section {
+  max-width: 960px;  
+}
+
+p {
+  max-width: 700px;
+}
+
+/* Form */
+
+.obscure-form-button {
+  padding: 8px 16px;
+  background-color: #885ab7;
+  text-decoration: none;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 18px;
+  border: none;
+  color: #fff;
+  margin-left: 8px;
+  &:hover {
+    cursor: pointer;
+    color: #885ab7;
+    background-color: #fff;
+  }
+}
+
+form div.form-control {
+  margin-bottom: 16px;
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  input.text-field {
+    padding: 8px;
+    display: block;
+    width: 100%;
+    max-width: 700px;
+    background-color: #12031d;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 18px;
+    border: 1px solid #fff;
+    &:focus {
+      outline: none;
+    }
+  }
+  textarea {
+    padding: 8px;
+    display: block;
+    width: 100%;
+    max-width: 700px;
+    min-height: 100px;
+    resize: none;
+    background-color: #12031d;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 18px;
+    border: 1px solid #fff;
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+form div.flex-form {
+  max-width: 700px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+/* Footer */
+
+footer {
+  padding: 16px 0px;
+}
+
+footer #current-year {
+  margin-left: 8px;
 }

@@ -7,6 +7,100 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <h1>Hello, World!</h1>
+  <header>
+    <div class="row">
+      <nav class="header-nav">
+        <ul>
+          <li>
+            <a class="obscure-anchor" href="#about">About</a>
+          </li>
+          <li>
+            <a class="obscure-anchor" href="#work">Work</a>
+          </li>
+          <li>
+            <a class="obscure-anchor" href="#projects">Projects</a>
+          </li>
+          <li>
+            <a class="obscure-anchor" href="#contact">Contact</a>
+          </li>
+        </ul>
+      </nav>
+      <a class="obscure-anchor" href="nicola-greco-resume-2024.docx" download>Resume</a>
+    </div>
+  </header>
+  <div class="header-buffer"></div>
+  <main>
+    <div class="section-row">
+      <section class="obscure-section scroll-margin-top" id="about">
+        <!-- About me -->
+        <h3>A little about me</h3>
+        <p>Lorem ipsum...</p>
+      </section>
+    </div>
+    <div class="section-row">
+      <section class="obscure-section scroll-margin-top" id="work">
+        <!-- Places I worked -->
+        <h3>Some of the places I've worked</h3>
+        <ul>
+          <li>Outreach</li>
+          <li>Vanguard</li>
+          <li>Brolik</li>
+        </ul>
+      </section>
+    </div>
+    <div class="section-row">
+      <section class="obscure-section scroll-margin-top" id="projects">
+        <!-- Projects I've made -->
+        <h3>My projects</h3>
+        <ul>
+          <li>Coffeemaker</li>
+          <li>Obscure Logs</li>
+        </ul>
+      </section>
+    </div>
+    <div class="section-row">
+      <section class="obscure-section scroll-margin-top" id="contact">
+        <h3>Get in touch</h3>
+        <p>For all business inquiries please fill out the form below, or you may contact me via email at <span>nico@nicogreco.com</span></span></p>
+        <div>
+          <form action="mailto:nico@nicogreco.com" method="post" encrypt="text/plain">
+            <div class="form-control">
+              <label for="contact-input-subject">Subject:</label>
+              <input class="text-field" type="text" name="subject" />
+            </div>         
+            <div class="form-control">
+              <label for="contact-input-message">Message:</label>
+              <textarea name="message" id="contact-input-message"></textarea>
+            </div>
+
+            <div class="form-control flex-form">
+              <a class="obscure-form-button" id="contact-mailto-link" href="mailto: nico@nicogreco.com?subject=Portfolio message&body=NOOP">Send</a>
+              <input class="obscure-form-button" type="reset" value="Reset" />
+            </div>  
+          </form>
+        </div>
+      </section>
+    </div>
+  </main>
+  <footer>
+    <div class="section-row">
+      <span>&copy; Nicola Mackenzie Greco</span>
+      <span id="current-year">2023</span>
+    </div>
+  </footer>
+
+  <script>
+    const BASE_MAILTO_LINK = 'nico@nicogreco.com?subject=Message from Portfolio Site View';
+    const mailToLink = document.getElementById('contact-mailto-link');
+    const messageInput = document.getElementById('contact-input-message');
+    messageInput.addEventListener('input', handleMessageInputChange);
+
+    function handleMessageInputChange(event) {
+      mailToLink.setAttribute('href', `mailto: ${BASE_MAILTO_LINK}&body=${event.target.value}`);
+    }
+
+    const currentYearSpan = document.getElementById('current-year');
+    currentYearSpan.textContent = new Date(Date.now()).getFullYear();
+  </script>
 </body>
 </html>
