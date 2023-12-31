@@ -63,14 +63,20 @@
         <h3>Get in touch</h3>
         <p>For all business inquiries please fill out the form below, or you may contact me via email at <span>nico@nicogreco.com</span></span></p>
         <div>
-          <form action="mailto:nico@nicogreco.com" method="post" encrypt="text/plain">
+          <form id="obscure-form" action="mailto:nico@nicogreco.com" method="post" encrypt="text/plain">
             <div class="form-control">
               <label for="contact-input-subject">Subject:</label>
-              <input class="text-field" type="text" name="subject" />
+              <input class="text-field" id="contact-input-subject" type="text" name="subject" required />
+              <div class="helper-text hidden">
+                <span id="subject-helper-text"></span>
+              </div>
             </div>         
             <div class="form-control">
               <label for="contact-input-message">Message:</label>
-              <textarea name="message" id="contact-input-message"></textarea>
+              <textarea name="message" id="contact-input-message" required></textarea>
+              <div class="helper-text hidden">
+                <span id="message-helper-text"></span>
+              </div>
             </div>
 
             <div class="form-control flex-form">
@@ -93,10 +99,48 @@
     const BASE_MAILTO_LINK = 'nico@nicogreco.com?subject=Message from Portfolio Site View';
     const mailToLink = document.getElementById('contact-mailto-link');
     const messageInput = document.getElementById('contact-input-message');
+    const subjectInput = document.getElementById('contact-input-subject');
+    const subjectHelperText = document.getElementById('subject-helper-text');
+    const messageHelperText = document.getElementById('message-helper-text');
+    const obscureForm = document.getElementById('obscure-form');
+
+    obscureForm.addEventListener('reset', handleFormReset);
+
     messageInput.addEventListener('input', handleMessageInputChange);
 
     function handleMessageInputChange(event) {
       mailToLink.setAttribute('href', `mailto: ${BASE_MAILTO_LINK}&body=${event.target.value}`);
+    }
+
+    mailToLink.addEventListener('click', handleFormSubmit);
+
+    function handleFormSubmit(e) {
+      const messageValid = messageInput.validity.valid;
+      const subjectValid = subjectInput.validity.valid;
+
+      if (!messageValid || !subjectValid) {
+        e.preventDefault();
+        if (!messageValid) {
+          // NOTE: set helper text
+          messageHelperText.textContent = 'This field is required.';
+          messageHelperText.parentElement.classList.remove('hidden');
+        } 
+        if (!subjectValid) {
+          // NOTE: set helper text
+          subjectHelperText.textContent = 'This field is required.';
+          subjectHelperText.parentElement.classList.remove('hidden');
+        }
+        return;
+      }
+
+      handleFormReset();
+    }
+
+    function handleFormReset() {
+      subjectHelperText.textContent = '';
+      messageHelperText.textContent = '';
+      subjectHelperText.parentElement.classList.add('hidden');
+      messageHelperText.parentElement.classList.add('hidden');
     }
 
     const currentYearSpan = document.getElementById('current-year');
