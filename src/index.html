@@ -195,7 +195,36 @@
   </footer>
 
   <script>
-    const BASE_MAILTO_LINK = 'nico@nicogreco.com?subject=Message from Portfolio Site View';
+    function formInfo() {
+      let subject = '';
+      let body = '';
+
+      function setSubject(str) {
+        subject = str;
+      }
+
+      function setBody(str) {
+        body = str;
+      }
+
+      function getSubject() {
+        return subject;
+      }
+
+      function getBody() {
+        return body;
+      }
+
+      return {
+        setSubject,
+        setBody,
+        getBody,
+        getSubject
+      }
+    }
+
+    const info = formInfo();
+    const BASE_MAILTO_LINK = 'nico@nicogreco.com';
     const mailToLink = document.getElementById('contact-mailto-link');
     const messageInput = document.getElementById('contact-input-message');
     const subjectInput = document.getElementById('contact-input-subject');
@@ -206,9 +235,67 @@
     obscureForm.addEventListener('reset', handleFormReset);
 
     messageInput.addEventListener('input', handleMessageInputChange);
+    subjectInput.addEventListener('input', handleSubjectInputChange);
+    messageInput.addEventListener('blur', validateField);
+    subjectInput.addEventListener('blur', validateField);
+
+    function validateField(e) {
+      const id = e.target.getAttribute('id');
+      const inputName = id.split('-')[2];
+
+      if (e.target.value != '') {
+        switch (inputName) {
+          case 'subject': {
+            subjectHelperText.parentElement.classList.add('hidden');
+            subjectHelperText.textContent = '';
+            break;
+          }
+          case 'message': {
+            messageHelperText.parentElement.classList.add('hidden');
+            messageHelperText.textContent = '';
+            break;
+          }
+          default: {
+            // NOTE: noop
+          }
+        }
+      } else {
+        switch (inputName) {
+          case 'subject': {
+            subjectHelperText.parentElement.classList.remove('hidden');
+            subjectHelperText.textContent = 'This field is required.';
+            break;
+          }
+          case 'message': {
+            messageHelperText.parentElement.classList.remove('hidden');
+            messageHelperText.textContent = 'This field is required.';
+            break;
+          }
+          default: {
+            // NOTE: noop
+          }
+        }
+      }
+    }
 
     function handleMessageInputChange(event) {
-      mailToLink.setAttribute('href', `mailto: ${BASE_MAILTO_LINK}&body=${event.target.value}`);
+      if (event.target.value != '') {
+        messageHelperText.parentElement.classList.add('hidden');
+        messageHelperText.textContent = '';
+      }
+      info.setBody(event.target.value);
+
+      mailToLink.setAttribute('href', `mailto: ${BASE_MAILTO_LINK}?subject=${info.getSubject()}&body=${info.getBody()}`);
+    }
+
+    function handleSubjectInputChange(event) {
+      if (event.target.value != '') {
+        subjectHelperText.parentElement.classList.add('hidden');
+        subjectHelperText.textContent = '';
+      } 
+
+      info.setSubject(event.target.value);
+      mailToLink.setAttribute('href', `mailto: ${BASE_MAILTO_LINK}?subject=${info.getSubject()}&body=${info.getBody()}`);
     }
 
     mailToLink.addEventListener('click', handleFormSubmit);
