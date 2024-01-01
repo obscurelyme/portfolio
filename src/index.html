@@ -34,7 +34,17 @@
       <section class="obscure-section scroll-margin-top" id="about">
         <!-- About me -->
         <h3>A little about me</h3>
-        <p>Lorem ipsum...</p>
+        <p>
+          My name is Nicola Greco, and I code things. I graduated from La Salle University with a degree in Multimedia Design in 2015 and began working as a full stack web developer at a small digital agency in Philadelpha, PA.
+          From there, I continued to deep dive into the world of software engineering working on side projects in both C++ and C#, eventually picking up Unity3D and creating a small horror game that I presented at <a class="obscure-anchor" target="_blank" href="https://www.gameacon.com/">Gameacon</a>.
+        </p>
+        <p>
+          I have spent most of my career working as a Frontend engineer. First delving into the world of jQuery followed by both AngularJS (made by google) and Angular v2+ (also made by google), and finally ReactJS. I 
+          reserve the right to keep my favorite to myself. 
+        </p>
+        <p>
+          Some of my free time is spent either playing video games or creating video games. My best accomplishments to date are without a doubt my self taught efforts to create my own 2D game engine in C++, CoffeeMaker. 
+        </p>
       </section>
     </div>
     <div class="section-row">
@@ -42,9 +52,76 @@
         <!-- Places I worked -->
         <h3>Some of the places I've worked</h3>
         <ul>
-          <li>Outreach</li>
-          <li>Vanguard</li>
-          <li>Brolik</li>
+          <li>
+            <div class="workplace">
+              <div class="workplace-logo-container">
+                <h2>Outreach</h2>
+                <div class="workplace-details">
+                  <span class="workplace-location">Seattle, WA</span>
+                  <span>|</span>
+                  <span class="workplace-timeframe">2020 - Present</span>
+                </div>
+              </div>
+
+              <blockquote>
+                <p>During my time at Outreach, I played a role as a Frontend Engineer on the Voice Experience Team. Here are some of my highlights...</p>
+              </blockquote>
+  
+              <ul class="workplace-job-summary">
+                <li>Led the team implementing a business authorization application using React/TypeScript and GraphQL for Outreach clients to comply with FCC mandated Shaken/Stir protocols enforced by Outreach's voice vendor[s].</li>
+                <li>Built out the company's web-based phone widget, which takes advantage of Websockets for real-time updates, GraphQL, and React/Typescript. Audio settings such as noise cancelation, echo suppression, and audio device could be persisted within browser's local storage.</li>
+                <li>Worked directly with lead designers, implementing design mockups within Figma into Storybook components.</li>
+                <li>Worked with backend engineers to address file uploading challenges in order to build out the Voicemail Drop feature of Outreach's phone widget using React/Typescript, GraphQL, and AWS S3.</li>
+                <li>Made contributions back into the frontend framework's common component library.</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <div class="workplace">
+              <div class="workplace-logo-container">
+                <h2>Vanguard Financial Group</h2>
+                <div class="workplace-details">
+                  <span class="workplace-location">Malvern, PA</span>
+                  <span>|</span>
+                  <span class="workplace-timeframe">2016 - 2020</span>
+                </div>
+              </div>
+
+              <blockquote>
+                <p>Some of my best experiences at Vanguard included non-stop creative sessions with product designers and fellow engineers in order to blueprint the next phase of the company's common UI library and create a better DX for all fellow engineers.</p>
+              </blockquote>
+
+              <ul class="workplace-job-summary">
+                <li>Worked on the development of a common component UI library, using Angular/TypeScript, for use within both internal and externally facing web applications. For this library, I architected the company's first functioning monorepo, leveraging Bamboo for CI/CD and release management.</li>
+                <li>Spearheaded research and development into a Bazel build system for Vanguard's UI component library, this later would translate into the first adopted NX workspace at the company.</li>
+                <li>Developed a NodeJS Command Line Application that automated the creation of Jira Tickets to IT support to speed up Developer Experience acquiring vendor modules.</li>
+                <li>Worked 1:1 with designers to develop an NX monorepo workspace that housed a web application and common component library built with Angular/JavaScript and Storybook.</li>
+                <li>Led a team of engineers to build out a health care cost portal for Vanguard clients enrolled within personal advisor services, leveraged in-house built RESTful APIs with an Angular frontend.</li>
+                <li>Developed CI/CD pipelines to run first in Jenkins and later within Bamboo using Atlassian tools. Reported code cleanliness status via SonarQube and displayed badges within repo READMEs.</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <div class="workplace">
+              <div class="workplace-logo-container">
+                <h2>Brolik</h2>
+                <div class="workplace-details">
+                  <span class="workplace-location">Philadelphia, PA</span>
+                  <span>|</span>
+                  <span class="workplace-timeframe">2014 - 2016</span>
+                </div>
+              </div>
+
+              <blockquote>
+                <p>Brolik is where my career got started. My time there holds a lot of value because it is where I grew from a designer to full stack web developer.</p>
+              </blockquote>
+
+              <ul class="workplace-job-summary">
+                <li>Created dynamic brochure websites, leveraging MySQL, PHP, and C# on the backend alongside HTML and Angular/JavaScript on the frontend using the company's proprietary content management system.</li>
+                <li>Met 1:1 with clients and designers to acquire full acceptance criteria for each project.</li>
+              </ul>
+            </div>
+          </li>
         </ul>
       </section>
     </div>
@@ -53,8 +130,30 @@
         <!-- Projects I've made -->
         <h3>My projects</h3>
         <ul>
-          <li>Coffeemaker</li>
-          <li>Obscure Logs</li>
+          <li>
+            <div class="obscure-project">
+              <div class="project-details">
+                <span>Coffeemaker</span>
+                <span>|</span>
+                <span>2D Game Engine</span>
+              </div>
+              <a target="_blank" href="https://github.com/obscurelyme/CoffeeMaker">
+                <svg focusable="false" aria-hidden="true" viewBox="0 0 24 24" class="icon"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg>
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="obscure-project">
+              <div class="project-details">
+                <span>Obscure Logs</span>
+                <span>|</span>
+                <span>Electron Text File Parser</span>
+              </div>
+              <a target="_blank" href="https://github.com/obscurelyme/wow-combat-parser">
+                <svg focusable="false" aria-hidden="true" viewBox="0 0 24 24" class="icon"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg>
+              </a>
+            </div>
+          </li>
         </ul>
       </section>
     </div>

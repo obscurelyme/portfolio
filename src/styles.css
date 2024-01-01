@@ -115,6 +115,79 @@ p {
   max-width: 700px;
 }
 
+img.company-logo {
+  max-width: 200px;
+  height: auto;
+}
+
+.workplace {
+  blockquote {
+    p {
+      font-style: italic;
+    }
+    background-color: #12031d;
+    margin: 8px 0px;
+    padding: 8px 40px;
+    border-bottom-right-radius: 50px;
+    border-top-left-radius: 50px;
+  }
+  margin-bottom: 24px;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.workplace-summary {
+  align-self: center;
+}
+
+.workplace-logo-container {
+  h2 {
+    margin: 0;
+    padding: 0;
+  }
+  display: flex;
+  flex-flow: row wrap;
+  margin-bottom: 8px;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.workplace-details {
+  font-style: italic;
+}
+
+ul.workplace-job-summary {
+  margin-left: 16px;
+  li:before {
+    content: "\2192";
+    padding-right: 8px;
+  }
+
+  li {
+    font-size: 16px;
+    margin-bottom: 16px;
+    max-width: 700px;
+  }
+}
+
+.icon {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  font-size: 32px;
+  fill: #fff;
+}
+
+.obscure-project {
+  .project-details {
+    margin-right: 16px;
+  }
+
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
 /* Form */
 
 .obscure-form-button {
