@@ -19,19 +19,22 @@ body {
   font-size: 18px;
 }
 
+.scroll-margin-top {
+  scroll-margin-top: 60px;
+  scroll-snap-margin-top: 60px;
+}
+
 /* Header Styles */
 
-@media (min-width: 960px) {
-  header {
-    padding: 0;
-  }
+.mobile-hide {
+  display: none;
 }
 
 header {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  height: 75px;
+  height: 45px;
   padding: 0px 16px;
   box-shadow: 0px -9px 20px 10px #fff;
   background-color: #885ab7;
@@ -41,14 +44,30 @@ header {
 }
 
 div.header-buffer {
-  height: 75px;
+  height: 45px;
   width: 100%;
+}
+
+@media (min-width: 960px) {
+  header {
+    padding: 0;
+    height: 75px;
+  }
+
+  div.header-buffer {
+    height: 75px;
+  }
+
+  .scroll-margin-top {
+    scroll-margin-top: 90px;
+    scroll-snap-margin-top: 90px;
+  }
 }
 
 div.row {
   display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
+  flex-flow: column nowrap;
+  justify-content: center;
   align-items: center;
   max-width: 960px;
   flex-grow: 1;
@@ -57,12 +76,14 @@ div.row {
 nav.header-nav ul {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 nav.header-nav {
+  ul li {
+    margin-right: 8px;
+  }
   max-width: 960px;
-  min-width: 300px;
 }
 
 ul {
@@ -92,9 +113,21 @@ ul li {
   }
 }
 
-.scroll-margin-top {
-  scroll-margin-top: 90px;
-  scroll-snap-margin-top: 90px;
+@media (min-width: 550px) {
+  .mobile-hide {
+    display: inline-block;
+  }
+
+  nav.header-nav {
+    ul li {
+      margin-right: 16px;
+    }
+  }
+
+  div.row {
+    flex-flow: row wrap;
+    justify-content: space-between;
+  }
 }
 
 div.section-row {
@@ -146,10 +179,16 @@ img.company-logo {
     padding: 0;
   }
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: column nowrap;
   margin-bottom: 8px;
-  align-items: flex-end;
-  justify-content: space-between;
+}
+
+@media (min-width: 650px) {
+  .workplace-logo-container {
+    flex-flow: row wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
 }
 
 .workplace-details {
